@@ -1,0 +1,47 @@
+* {
+  font-family: "Libre Baskerville";
+}
+
+#score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-container {
+  width: 100%;
+  border: solid 1px red;
+  display: flex;
+  justify-content: center;
+  margin: 25px;
+}
+
+.flex-container-answers {
+  border: solid 1px red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#question {
+}
+
+#answers {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-evenly;
+}
+
+#answers h3 {
+  margin: 50px;
+  padding: 30px;
+  border: solid 1px blue;
+}
+
+/* #answers button {
+  padding: 10px 25px;
+  border-radius: 10%;
+  background-color: white;
+  border: solid 1px black;
+} */
