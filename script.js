@@ -28,7 +28,7 @@ let verbs = [
       (firstPersonPlural = {
         suffix: "amos",
         conjugation: "estamos",
-        sentenceSpanish: "Nosotos _____ felices.",
+        sentenceSpanish: "Nosotros _____ felices.",
         sentenceEnglish: "We are happy",
         correct: false,
       }),
@@ -129,7 +129,7 @@ if (current) {
   current.tense[index].correct = true;
 }
 
-// Filter the tenses into a correct answer and an array of incorrect answers
+// Filter correct and incorrect answers
 let correctAnswer;
 let incorrectAnswers = [];
 
@@ -175,10 +175,27 @@ applyText = () => {
 let i = 0;
 while (i < answers.length) {
   applyText();
+  //Apply class of 'incorrect-answer' to all buttons
+  answers[i].setAttribute("class", "incorrect-answer");
   i++;
 }
 
 // Replace the text of 1 button with the correct answer
 let answerIndex = Math.floor(Math.random() * answers.length);
+
 answers[answerIndex].innerHTML = `${correctAnswer}`;
+//Set an id of correct, and remove the incorrect class from the correct answer
+answers[answerIndex].setAttribute("id", "correct-answer");
+answers[answerIndex].removeAttribute("class", "incorrect-answer");
+
+let score = 0;
+let scoreCount = document.getElementById("score-count");
+let correctAnswerButton = document.getElementById("correct-answer");
+console.log(correctAnswerButton);
 console.log(`The correct answer is: ${correctAnswer}`);
+
+correctAnswerButton.addEventListener("click", function () {
+  score++;
+  document.querySelector("#question-sentence").setAttribute("id", "correct");
+  document.querySelector("#score-count").innerHTML = score;
+});

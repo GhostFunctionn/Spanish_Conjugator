@@ -45,3 +45,12 @@
   background-color: white;
   border: solid 1px black;
 } */
+
+#correct {
+  background-color: green;
+  color: white;
+}
+
+.incorrect {
+  color: red;
+}
