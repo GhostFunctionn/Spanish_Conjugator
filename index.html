@@ -8,8 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -37,11 +39,19 @@
 
     <div class="flex-container flex-container-answers">
       <div id="answers">
-        <button id="answer-button1"></button>
-        <button id="answer-button2"></button>
-        <button id="answer-button3"></button>
-        <button id="answer-button4"></button>
+        <a id="answer-button1"></a>
+        <a id="answer-button2"></a>
+        <a id="answer-button3"></a>
+        <a id="answer-button4"></a>
       </div>
+    </div>
+
+    <div class="flex-container" id="correct-sign-container">
+      <h2 id="correct-sign">Correct!</h2>
+    </div>
+
+    <div class="flex-container" id="incorrect-sign-container">
+      <h2 id="incorrect-sign">Try again!</h2>
     </div>
 
     <script src="script.js"></script>

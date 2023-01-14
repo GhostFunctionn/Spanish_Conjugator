@@ -1,5 +1,9 @@
 * {
-  font-family: "Libre Baskerville";
+  font-family: "Nunito";
+}
+body {
+  background-color: #17255a;
+  color: #f2dbba;
 }
 
 #score {
@@ -10,14 +14,14 @@
 
 .flex-container {
   width: 100%;
-  border: solid 1px red;
+  /* border: solid 1px white; */
   display: flex;
   justify-content: center;
   margin: 25px;
 }
 
 .flex-container-answers {
-  border: solid 1px red;
+  /* border: solid 1px white; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -29,7 +33,6 @@
 #answers {
   display: flex;
   flex-direction: row;
-
   justify-content: space-evenly;
 }
 
@@ -39,18 +42,40 @@
   border: solid 1px blue;
 }
 
-/* #answers button {
-  padding: 10px 25px;
-  border-radius: 10%;
-  background-color: white;
-  border: solid 1px black;
-} */
+#answers a {
+  font-size: 1.3rem;
+  padding: 20px 50px;
+  border-radius: 7%;
+  background-color: none;
+  border: solid 1px #f2dbba;
+  cursor: pointer;
+}
+
+#answers a:hover {
+  font-size: 1.3rem;
+  padding: 20px 50px;
+  border-radius: 7%;
+  background-color: none;
+  border: solid 1px #f2dbba;
+  color: #17255a;
+  background-color: #f2dbba;
+  cursor: pointer;
+}
 
 #correct {
+  padding: 20px 50px;
   background-color: green;
   color: white;
 }
 
+#correct-sign {
+  display: none;
+}
+
 .incorrect {
   color: red;
+}
+
+#incorrect-sign {
+  display: none;
 }

@@ -96,57 +96,118 @@ let verbs = [
       }),
     ],
   }),
+  (estudiar = {
+    word: "estudiar",
+    root: "estud",
+    tense: [
+      (firstPersonSingular = {
+        suffix: "o",
+        conjugation: "estudio",
+        sentenceSpanish: "Yo _____",
+        sentenceEnglish: "I study.",
+        correct: false,
+      }),
+      (secondPersonSingular = {
+        suffix: "as",
+        conjugation: "estudias",
+        sentenceSpanish: "Tu _____",
+        sentenceEnglish: "You study",
+        correct: false,
+      }),
+      (thirdPersonSingular = {
+        suffix: "a",
+        conjugation: "estudia",
+        sentenceSpanish: "El/Ella _____",
+        sentenceEnglish: "He/She/It studies",
+        correct: false,
+      }),
+      (firstPersonPlural = {
+        suffix: "amos",
+        conjugation: "estudiamos",
+        sentenceSpanish: "Nosotros _____.",
+        sentenceEnglish: "We study.",
+        correct: false,
+      }),
+      (secondPersonPlural = {
+        suffix: "ais",
+        conjugation: "estudais",
+        sentenceSpanish: "Vosotros _____.",
+        sentenceEnglish: "You study. (plural)",
+        correct: false,
+      }),
+      (thirdPersonPlural = {
+        suffix: "an",
+        conjugation: "estudian",
+        sentenceSpanish: "Ellos/Ellas _____.",
+        sentenceEnglish: "They study.",
+        correct: false,
+      }),
+    ],
+  }),
 ];
 
-// Select a random element from an array of objects (verbs).
-// Store the current verb object in a variable.
-// Apply the string value of the object property as text in the h2 element.
-let randomIndex;
+// Select a random element from an array of objects
+// Set innerHTML as text value
+
 randomItem = (array) => {
-  randomIndex = Math.floor(Math.random() * array.length);
-  let item = array[randomIndex];
+  let randomElement;
+  randomElement = Math.floor(Math.random() * array.length);
+  let item = array[randomElement];
   return item;
+};
+
+newVerb = () => {
+  current = randomItem(verbs);
+  document.getElementById("question-verb").innerHTML = `${current.word}`;
 };
 
 let current = randomItem(verbs);
 
 document.getElementById("question-verb").innerHTML = `${current.word}`;
 
-// For the given verb, select a random tense from the tense property array
-if (current) {
-  // Create an index number
-  let index = Math.floor(Math.random() * 6);
-  //Fill the h2 text with an incomplete sentence
-  document.getElementById(
-    "question-sentence"
-  ).innerHTML = `${current.tense[index].sentenceSpanish}`;
+// Select random tense
+setSentence = () => {
+  if (current) {
+    // Create an index number
+    let index = Math.floor(Math.random() * 6);
+    //Fill the h2 text with an incomplete sentence
+    document.getElementById(
+      "question-sentence"
+    ).innerHTML = `${current.tense[index].sentenceSpanish}`;
 
-  document.getElementById(
-    "question-sentence-english"
-  ).innerHTML = `${current.tense[index].sentenceEnglish}`;
+    document.getElementById(
+      "question-sentence-english"
+    ).innerHTML = `${current.tense[index].sentenceEnglish}`;
 
-  // Add a new property to the current tense object to distinguish it as correct
-  current.tense[index].correct = true;
-}
+    current.tense[index].correct = true;
+  }
+};
 
-// Filter correct and incorrect answers
+setSentence();
+
+// Filter correct from incorrect answer
 let correctAnswer;
 let incorrectAnswers = [];
 
-current.tense.filter((answer) => {
-  if (answer.correct === false) {
-    incorrectAnswers.push(answer.conjugation);
-  } else {
-    correctAnswer = answer.conjugation;
-  }
-});
+sortAnswers = () => {
+  current.tense.filter((answer) => {
+    if (answer.correct === false) {
+      incorrectAnswers.push(answer.conjugation);
+    } else {
+      correctAnswer = answer.conjugation;
+      correctAnswer;
+    }
+    incorrectAnswers;
+    console.log(incorrectAnswers);
+    console.log(`The correct answer is: ${correctAnswer}`);
+  });
+};
 
-console.log(incorrectAnswers);
-console.log(`The correct answer is: ${correctAnswer}`);
-
-// Filll the button text content with the correct answer and three incorrect answers
+// Fill the button text content with the correct answer and three incorrect answers
 let answers = document.getElementById("answers").children;
 console.log(answers);
+
+sortAnswers();
 
 // Replace the text of all 4 buttons with incorrect answers
 let getIndex = (length) => {
@@ -157,7 +218,6 @@ applyText = () => {
   let buttonText = incorrectAnswers[getIndex(incorrectAnswers.length)];
   answers[i].innerHTML = buttonText;
 
-  //Keep track of what very is being used, which is being removed, and which are still available for use.
   console.log("The button text is ", buttonText);
   console.log(
     "The element being removed is: ",
@@ -165,32 +225,35 @@ applyText = () => {
   );
   console.log("The remaining elements are: ", incorrectAnswers);
 
-  // I don't know why I some buttons were getting there text set to 'undefined', this just to stop that happening
+  // Stop buttons recieving 'undefined' for innerHTML
   if (buttonText === undefined) {
     answers[i].innerHTML = incorrectAnswers[getIndex(incorrectAnswers.length)];
   }
 };
 
-// Loop over the button elements and apply text
+// Loop and apply text
 let i = 0;
 while (i < answers.length) {
   applyText();
   //Apply class of 'incorrect-answer' to all buttons
   answers[i].setAttribute("class", "incorrect-answer");
   i++;
+  newVerb();
 }
 
-// Replace the text of 1 button with the correct answer
+// Distinguish 1 correct answer
 let answerIndex = Math.floor(Math.random() * answers.length);
-
 answers[answerIndex].innerHTML = `${correctAnswer}`;
-//Set an id of correct, and remove the incorrect class from the correct answer
 answers[answerIndex].setAttribute("id", "correct-answer");
 answers[answerIndex].removeAttribute("class", "incorrect-answer");
 
-let score = 0;
+let score = 5;
 let scoreCount = document.getElementById("score-count");
 let correctAnswerButton = document.getElementById("correct-answer");
+
+let correctSign = document.getElementById("correct-sign");
+console.log(correctSign);
+
 console.log(correctAnswerButton);
 console.log(`The correct answer is: ${correctAnswer}`);
 
@@ -199,3 +262,21 @@ correctAnswerButton.addEventListener("click", function () {
   document.querySelector("#question-sentence").setAttribute("id", "correct");
   document.querySelector("#score-count").innerHTML = score;
 });
+
+let buttons = document.querySelectorAll(".incorrect-answer");
+let incorrectSign = document.getElementById("incorrect-sign");
+const incorrectBanner = document.getElementById("incorrect-sign-container");
+console.log(buttons);
+
+// Display text message on incorrect click
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", function (event) {
+    // let incorrectSign = document.getElementById("incorrect-sign");
+    incorrectSign.style.display = "block";
+    score--;
+    document.querySelector("#score-count").innerHTML = score;
+    newVerb();
+    setSentence();
+    console.log(current);
+  });
+}
